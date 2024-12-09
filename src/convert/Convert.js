@@ -1,34 +1,32 @@
 import React from 'react';
 
-class Convert extends React.Component
-{
-    state = {number:10011011}
-   
-    update = (event) => this.setState({number:event.target.value})
+class Convert extends React.Component {
+    state = { number: '10011011' };
 
-   
+    update = (event) => this.setState({ number: event.target.value });
 
-    render()
-    {
-        
-        return(
+    toDecimal = (binary) => parseInt(binary, 2).toString(10);
+    toHexadecimal = (decimal) => parseInt(decimal, 10).toString(16).toUpperCase();
+
+    render() {
+        const { number } = this.state;
+        const decimal = this.toDecimal(number);
+        const hexadecimal = this.toHexadecimal(decimal);
+
+        return (
             <>
-            <div>
-                <form>
-                   
-                    Number:<input value={this.state.number} name="number" onChange={this.update}/>
-                    <br/>
-                    <p>Двоичное: </p> {/* <p>Двоичное: {binary}</p>  */}
-                    <p>Десятичное: </p> {/* <p>Десятичное: {decimal}</p>*/}
-                    <p>Шестнадцатеричное: </p> {/* <p>Шестнадцатеричное: {hexadecimal}</p>*/}
-
-                </form>
-
-                {/* <p>{this.state.number}</p> */}
-                       
-            </div>
+                <div>
+                    <form>
+                        Number: <input value={number} name="number" onChange={this.update} />
+                        <br />
+                        <p>Двоичное: {number}</p>
+                        <p>Десятичное: {decimal}</p>
+                        <p>Шестнадцатеричное: {hexadecimal}</p>
+                    </form>
+                </div>
             </>
-        )
+        );
     }
 }
+
 export default Convert;
