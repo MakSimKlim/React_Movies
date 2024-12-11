@@ -1,40 +1,20 @@
-//import logo from '../logo.svg';
-import React from 'react';
-import Convert from '../convert/Convert';
+import logo from '../logo.svg';
+import Header from '../layout/Header';
+import Main from '../layout/Main';
+import Footer from '../layout/Footer';
 
 
 import './App.css';
 
-//function App() {
-class App extends React.Component
-{
-  render()
-  {
-        return (
-        // <div className="App">
-        //   <header className="App-header">
-        //     <img src={logo} className="App-logo" alt="logo" />
-        //     <p>
-        //       Edit <code>src/App.js</code> and save to reload.
-        //     </p>
-        //     <a
-        //       className="App-link"
-        //       href="https://reactjs.org"
-        //       target="_blank"
-        //       rel="noopener noreferrer"
-        //     >
-        //       Learn React
-        //     </a>
-        //   </header>
-        // </div>
-
-        <>       
-
-        <Convert />
-       
-        </>
-      );
-    }
+function App() {
+  return(
+    <>
+      <Header />
+      <Main />
+      <Footer />
+    </>
+  );
 }
+
 
 export default App;
