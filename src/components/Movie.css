@@ -1,0 +1,12 @@
+.card{
+    flex-basis: 300px;
+    margin:20px;
+    box-shadow: 1px 1px 14px #CCC;
+}
+.card div{
+    padding:10px 20px;
+}
+.card p{
+    display: flex;
+    justify-content: space-between;
+}
