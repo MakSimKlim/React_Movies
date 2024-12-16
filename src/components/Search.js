@@ -1,21 +1,35 @@
 import React from 'react';
 import './Search.css';
 
+const itemOnPage = 10; // Константа для количества элементов на странице
+
 class Search extends React.Component
 {
     constructor(props)
     {
         super(props);
         //this.setState({totalPages:props.total/10})
-        this.state.totalPages=props.total
+        //this.state.totalPages=props.total
+        
+        // Устанавливаем начальное состояние
+        this.state={
+            search: "Matrix",
+            type:   "all",
+            page:   1,
+            totalPages: Math.ceil((props.total || 0) / itemOnPage) // Рассчитываем количество страниц на основе переданного props.total
+        }
+
+        
     }
-    state=
-    {
-        search: "Terminator",
-        type:   "all",
-        page:   1,
-        totalPages: 1
+
+    // для обновления конечного количества страниц после фильтрации
+    componentDidUpdate(prevProps, prevState) {
+        // Если total или фильтр изменились, обновляем totalPages
+        if (prevProps.total !== this.props.total || prevState.type !== this.state.type) {
+            this.setState({ totalPages: Math.ceil((this.props.total || 0) / itemOnPage) });
+        }
     }
+    
 
     handleKey = (event) =>
     {
@@ -115,9 +129,27 @@ class Search extends React.Component
                     </button>                   
                 </div>
 
-                <div className="navigator">
-                    <button className="btn" onClick={this.prevPage}>Previous</button>
+                {/* <div className="navigator">
+                    <button className="btn" onClick={this.prevPage}>Previous</button>                    
                     <button className="btn" onClick={this.nextPage}>Next</button>
+                </div> */}
+
+                <div className="navigator">
+                    <button
+                        className="btn"
+                        onClick={this.prevPage}
+                        disabled={this.state.page === 1} // Отключаем кнопку, если текущая страница 1
+                    >
+                        Previous
+                    </button>
+                    <span>Page {this.state.page} of {this.state.totalPages}</span>
+                    <button
+                        className="btn"
+                        onClick={this.nextPage}
+                        disabled={this.state.page === this.state.totalPages} // Отключаем кнопку, если текущая страница последняя
+                    >
+                        Next
+                    </button>
                 </div>
 
             </>
