@@ -8,7 +8,8 @@
     "gh-pages": "^6.2.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "react-window": "^1.8.10"
   },
   "scripts": {
     "predeploy": "npm run build",

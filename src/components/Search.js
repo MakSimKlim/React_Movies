@@ -1,8 +1,6 @@
 import React from 'react';
 import './Search.css';
 
-const itemOnPage = 10; // Константа для количества элементов на странице
-
 class Search extends React.Component
 {
     constructor(props)
@@ -16,7 +14,7 @@ class Search extends React.Component
             search: "Matrix",
             type:   "all",
             page:   1,
-            totalPages: Math.ceil((props.total || 0) / itemOnPage) // Рассчитываем количество страниц на основе переданного props.total
+            totalPages: Math.ceil((props.total || 0) / 10) // Рассчитываем количество страниц на основе переданного props.total
         }
 
         
@@ -26,7 +24,7 @@ class Search extends React.Component
     componentDidUpdate(prevProps, prevState) {
         // Если total или фильтр изменились, обновляем totalPages
         if (prevProps.total !== this.props.total || prevState.type !== this.state.type) {
-            this.setState({ totalPages: Math.ceil((this.props.total || 0) / itemOnPage) });
+            this.setState({ totalPages: Math.ceil((this.props.total || 0) / 10) });
         }
     }
     
@@ -130,9 +128,16 @@ class Search extends React.Component
                 </div>
 
                 {/* <div className="navigator">
-                    <button className="btn" onClick={this.prevPage}>Previous</button>                    
-                    <button className="btn" onClick={this.nextPage}>Next</button>
-                </div> */}
+                    <button className="btn" onClick={this.nextPage}>Next</button>                    
+                    <button className="btn" onClick={this.lastPage}>Last</button>
+                </div> 
+                <div className="debug">
+                    {this.state.page}<br/>
+                    {this.state.totalpages}
+                </div>
+                
+                
+                */}
 
                 <div className="navigator">
                     <button
