@@ -55,3 +55,9 @@
     display: flex;
     justify-content: center; /* Центрирует кнопки по горизонтали */
     }
+
+    .navigator .btn.active {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }

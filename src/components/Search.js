@@ -65,8 +65,39 @@ class Search extends React.Component
             )
         }
 
+        goToPage = (page) => {
+            this.setState(
+                { page },
+                () => this.props.searchMovie(this.state.search, this.state.type, page)
+            );
+        };
+
+        renderPaginationButtons = () => {
+            const { page, totalPages } = this.state;
+    
+            // Определяем диапазон кнопок пагинации
+            const startPage = Math.max(1, page - 2);
+            const endPage = Math.min(totalPages, page + 2);
+            const buttons = [];
+    
+            for (let i = startPage; i <= endPage; i++) {
+                buttons.push(
+                    <button
+                        key={i}
+                        className={`btn ${i === page ? 'active' : ''}`}
+                        onClick={() => this.goToPage(i)}
+                    >
+                        {i}
+                    </button>
+                );
+            }
+    
+            return buttons;
+        };
+
     render()
     {
+        const { page, totalPages } = this.state;
         console.log('Search render')
         return(
             <>
@@ -140,6 +171,16 @@ class Search extends React.Component
                 */}
 
                 <div className="navigator">
+                    {/* Кнопка First */}
+                    <button
+                        className="btn"
+                        onClick={() => this.goToPage(1)}
+                        disabled={page === 1}
+                    >
+                        First
+                    </button>
+
+                    {/* Кнопка Previous */}
                     <button
                         className="btn"
                         onClick={this.prevPage}
@@ -147,13 +188,25 @@ class Search extends React.Component
                     >
                         Previous
                     </button>
-                    <span>Page {this.state.page} of {this.state.totalPages}</span>
+                    {/* <span>Page {this.state.page} of {this.state.totalPages}</span> */}
+                    {/* Кнопки пагинации */}
+                    {this.renderPaginationButtons()}
+
+                    {/* Кнопка Next */}
                     <button
                         className="btn"
                         onClick={this.nextPage}
                         disabled={this.state.page === this.state.totalPages} // Отключаем кнопку, если текущая страница последняя
                     >
                         Next
+                    </button>
+                    {/* Кнопка Last */}
+                    <button
+                        className="btn"
+                        onClick={() => this.goToPage(totalPages)}
+                        disabled={page === totalPages}
+                    >
+                        Last
                     </button>
                 </div>
 
