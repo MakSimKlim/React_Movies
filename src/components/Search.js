@@ -73,26 +73,50 @@ class Search extends React.Component
         };
 
         renderPaginationButtons = () => {
+            // const { page, totalPages } = this.state;
+    
+            // // Определяем диапазон кнопок пагинации
+            // const startPage = Math.max(1, page - 2);
+            // const endPage = Math.min(totalPages, page + 2);
+            
+            // const buttons = [];
+    
+            // for (let i = startPage; i <= endPage; i++) {
+            //     buttons.push(
+            //         <button
+            //             key={i}
+            //             className={`btn ${i === page ? 'active' : ''}`}
+            //             onClick={() => this.goToPage(i)}
+            //         >
+            //             {i}
+            //         </button>
+            //     );
+            // }
+    
+            // return buttons;
             const { page, totalPages } = this.state;
-    
-            // Определяем диапазон кнопок пагинации
-            const startPage = Math.max(1, page - 2);
-            const endPage = Math.min(totalPages, page + 2);
+            const totalButtons = 5;
+            const halfButtons = Math.floor(totalButtons / 2);
+
+            const startPage = Math.max(1, page - halfButtons);
+            const endPage = Math.min(totalPages, startPage + totalButtons - 1);
+            const adjustedStartPage = Math.max(1, endPage - totalButtons + 1);
+
             const buttons = [];
-    
-            for (let i = startPage; i <= endPage; i++) {
+            for (let i = adjustedStartPage; i <= endPage; i++) {
                 buttons.push(
                     <button
                         key={i}
-                        className={`btn ${i === page ? 'active' : ''}`}
+                        className={`btn2 ${i === page ? 'active' : ''}`}
                         onClick={() => this.goToPage(i)}
                     >
                         {i}
                     </button>
                 );
             }
-    
+
             return buttons;
+
         };
 
     render()
@@ -187,7 +211,7 @@ class Search extends React.Component
                         disabled={this.state.page === 1} // Отключаем кнопку, если текущая страница 1
                     >
                         Previous
-                    </button>
+                    </button >
                     {/* <span>Page {this.state.page} of {this.state.totalPages}</span> */}
                     {/* Кнопки пагинации */}
                     {this.renderPaginationButtons()}

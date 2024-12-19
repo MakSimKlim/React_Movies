@@ -34,6 +34,21 @@
 
 }
 
+.btn2
+{
+    width: 50px;
+    padding: 6px 16px;
+    background: rgb(0,91,151); 
+    color: #FFF;
+    border: 2px solid;
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: inset 1px 1px 4px 2px #FFF;
+    cursor: pointer;
+
+}
+
+
 .radio
 {
     margin:20px 50px 0;
@@ -56,8 +71,14 @@
     justify-content: center; /* Центрирует кнопки по горизонтали */
     }
 
-    .navigator .btn.active {
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
-    }
+.navigator .btn.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.navigator .btn2.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
