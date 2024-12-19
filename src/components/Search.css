@@ -10,7 +10,7 @@
     border:0;
     width:100%;
     color:#999;
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
 }
 
@@ -38,7 +38,7 @@
 {
     width: 50px;
     padding: 6px 16px;
-    background: rgb(0,91,151); 
+    background: #999; 
     color: #FFF;
     border: 2px solid;
     font-weight: bold;
@@ -72,13 +72,13 @@
     }
 
 .navigator .btn.active {
-    background-color: #007bff;
+    background-color:rgb(0,91,151);
     color: white;
     font-weight: bold;
 }
 
 .navigator .btn2.active {
-    background-color: #007bff;
+    background-color:  rgb(0,91,151);
     color: white;
     font-weight: bold;
 }
