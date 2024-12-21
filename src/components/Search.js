@@ -6,8 +6,6 @@ class Search extends React.Component
     constructor(props)
     {
         super(props);
-        //this.setState({totalPages:props.total/10})
-        //this.state.totalPages=props.total
         
         // Устанавливаем начальное состояние
         this.state={
@@ -72,58 +70,50 @@ class Search extends React.Component
             );
         };
 
-        renderPaginationButtons = () => {
-            // const { page, totalPages } = this.state;
-    
-            // // Определяем диапазон кнопок пагинации
-            // const startPage = Math.max(1, page - 2);
-            // const endPage = Math.min(totalPages, page + 2);
-            
-            // const buttons = [];
-    
-            // for (let i = startPage; i <= endPage; i++) {
-            //     buttons.push(
-            //         <button
-            //             key={i}
-            //             className={`btn ${i === page ? 'active' : ''}`}
-            //             onClick={() => this.goToPage(i)}
-            //         >
-            //             {i}
-            //         </button>
-            //     );
-            // }
-    
-            // return buttons;
+        renderPaginationButtons = () => {            
+
             const { page, totalPages } = this.state;
             const totalButtons = 5;
             const halfButtons = Math.floor(totalButtons / 2);
 
-            const startPage = Math.max(1, page - halfButtons);
-            const endPage = Math.min(totalPages, startPage + totalButtons - 1);
-            const adjustedStartPage = Math.max(1, endPage - totalButtons + 1);
+            let startPage = Math.max(1, page - halfButtons);  
+            let endPage = Math.min(totalPages, startPage + totalButtons - 1);
 
-            const buttons = [];
-            for (let i = adjustedStartPage; i <= endPage; i++) {
-                buttons.push(
-                    <button
-                        key={i}
-                        className={`btn2 ${i === page ? 'active' : ''}`}
-                        onClick={() => this.goToPage(i)}
-                    >
-                        {i}
-                    </button>
-                );
-            }
+            // Если количество отображаемых кнопок меньше, чем totalButtons 
+            if (endPage - startPage + 1 < totalButtons) {
+                 startPage = Math.max(1, endPage - totalButtons + 1); 
+                } 
+            // Убедимся, что отображается минимум totalButtons кнопок 
+            if (totalPages <= totalButtons) {
+                 startPage = 1; 
+                 endPage = totalPages; 
+                }
 
-            return buttons;
+            return { startPage, endPage, page };
 
         };
 
     render()
     {
         const { page, totalPages } = this.state;
+        const { startPage, endPage } = this.renderPaginationButtons();
+        
+        const buttons = []; 
+        for (let i = startPage; i <= endPage; i++) {
+             buttons.push(
+                 <button 
+                    key={i} 
+                    className={`btn2 ${i === page ? 'active' : ''}`} 
+                    onClick={() => this.goToPage(i)} 
+                    > 
+                    {i} 
+                 </button> 
+                 ); 
+                }
+
         console.log('Search render')
-        return(
+
+         return(
             <>
                     <div className="radio">
                         <div>
@@ -181,19 +171,7 @@ class Search extends React.Component
                         Search
                     </button>                   
                 </div>
-
-                {/* <div className="navigator">
-                    <button className="btn" onClick={this.nextPage}>Next</button>                    
-                    <button className="btn" onClick={this.lastPage}>Last</button>
-                </div> 
-                <div className="debug">
-                    {this.state.page}<br/>
-                    {this.state.totalpages}
-                </div>
-                
-                
-                */}
-
+               
                 <div className="navigator">
                     {/* Кнопка First */}
                     <button
@@ -212,9 +190,9 @@ class Search extends React.Component
                     >
                         Previous
                     </button >
-                    {/* <span>Page {this.state.page} of {this.state.totalPages}</span> */}
-                    {/* Кнопки пагинации */}
-                    {this.renderPaginationButtons()}
+                   
+                    {/* Кнопки пагинации */}                    
+                    {buttons}
 
                     {/* Кнопка Next */}
                     <button
@@ -224,6 +202,7 @@ class Search extends React.Component
                     >
                         Next
                     </button>
+                    
                     {/* Кнопка Last */}
                     <button
                         className="btn"
