@@ -76,6 +76,7 @@ class Search extends React.Component
             const totalButtons = 5;
             const halfButtons = Math.floor(totalButtons / 2);
 
+            //let позволяет нам изменять значение переменных в зависимости от условий
             let startPage = Math.max(1, page - halfButtons);  
             let endPage = Math.min(totalPages, startPage + totalButtons - 1);
 
@@ -202,7 +203,7 @@ class Search extends React.Component
                     >
                         Next
                     </button>
-                    
+
                     {/* Кнопка Last */}
                     <button
                         className="btn"
